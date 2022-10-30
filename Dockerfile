@@ -9,7 +9,7 @@ WORKDIR $HOME
 ######### Customize Container Here ###########
 
 # INSTALL MAPTOOL
-COPY ./src/maptool/install-maptool.sh $INST_SCRIPTS/maptool
+COPY ./src/maptool/install-maptool.sh $INST_SCRIPTS/maptool/
 RUN bash $INST_SCRIPTS/maptool/install-maptool.sh && rm -rf $INST_SCRIPTS/maptool/
 
 ### Install Tools
