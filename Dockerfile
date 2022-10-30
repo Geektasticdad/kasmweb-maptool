@@ -10,12 +10,11 @@ WORKDIR $HOME
 
 # INSTALL MAPTOOL
 COPY ./src/maptool/install-maptool.sh $INST_SCRIPTS/maptool/
-RUN bash wget -O $INST_SCRIPTS/maptool/maptool_1.12.2-amd64.deb  https://github.com/RPTools/maptool/releases/download/1.12.2/maptool_1.12.2-amd64.deb
 RUN bash $INST_SCRIPTS/maptool/install-maptool.sh && rm -rf $INST_SCRIPTS/maptool/
 
 ### Install Tools
 COPY ./src/ubuntu/install/tools $INST_SCRIPTS/tools/
-RUN bash $INST_SCRIPTS/tools/install_tools_deluxe.sh  && rm -rf $INST_SCRIPTS/tools/
+RUN bash $INST_SCRIPTS/tools/install_tools_deluxe.sh && rm -rf $INST_SCRIPTS/tools/
 
 # Install Utilities
 COPY ./src/ubuntu/install/misc $INST_SCRIPTS/misc/
