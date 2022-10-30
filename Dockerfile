@@ -9,7 +9,8 @@ WORKDIR $HOME
 ######### Customize Container Here ###########
 
 # INSTALL MAPTOOL
-COPY ./src/maptool/install-maptool.sh $INST_SCRIPTS/maptool
+COPY ./src/maptool/install-maptool.sh $INST_SCRIPTS/maptool/
+RUN bash wget -O $INST_SCRIPTS/maptool/maptool_1.12.2-amd64.deb  https://github.com/RPTools/maptool/releases/download/1.12.2/maptool_1.12.2-amd64.deb
 RUN bash $INST_SCRIPTS/maptool/install-maptool.sh && rm -rf $INST_SCRIPTS/maptool/
 
 ### Install Tools
