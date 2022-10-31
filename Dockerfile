@@ -10,7 +10,7 @@ WORKDIR $HOME
 
 # INSTALL MAPTOOL
 COPY ./src/maptool/install-maptool.sh $INST_SCRIPTS/maptool/
-COPY ./src/maptool/maptool.desktop $HOME/Desktop/
+COPY ./src/maptool/maptool-Maptool.desktop $HOME/Desktop/
 RUN bash $INST_SCRIPTS/maptool/install-maptool.sh && rm -rf $INST_SCRIPTS/maptool/
 
 ### Install Tools
