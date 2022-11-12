@@ -9,30 +9,15 @@ WORKDIR $HOME
 ######### Customize Container Here ###########
 
 # INSTALL MAPTOOL
-COPY ./src/maptool/install-maptool.sh $INST_SCRIPTS/maptool/
-COPY ./src/maptool/maptool-Maptool.desktop $HOME/Desktop/
-RUN bash $INST_SCRIPTS/maptool/install-maptool.sh && rm -rf $INST_SCRIPTS/maptool/
+RUN wget https://github.com/RPTools/maptool/releases/download/1.10.2/maptool_1.10.2-amd64.deb \
+    && apt-get update \
+    && apt-get install -y ./maptool_1.10.2-amd64.deb \
+    && cp /opt/maptool/lib/maptool-MapTool.desktop $HOME/Desktop/ \
+    && chmod +x $HOME/Desktop/maptool-MapTool.desktop \
+    && chown 1000:1000 $HOME/Desktop/maptool-MapTool.desktop
 
-### Install Tools
-COPY ./src/ubuntu/install/tools $INST_SCRIPTS/tools/
-RUN bash $INST_SCRIPTS/tools/install_tools_deluxe.sh && rm -rf $INST_SCRIPTS/tools/
+RUN echo "/usr/bin/desktop_ready && /opt/maptool/bin/MapTool &" > $STARTUPDIR/custom_startup.sh && chmod +x $STARTUPDIR/custom_startup.sh
 
-# Install Utilities
-COPY ./src/ubuntu/install/misc $INST_SCRIPTS/misc/
-RUN bash $INST_SCRIPTS/misc/install_tools.sh && rm -rf $INST_SCRIPTS/misc/
-
-# Install Google Chrome
-COPY ./src/ubuntu/install/chrome $INST_SCRIPTS/chrome/
-RUN bash $INST_SCRIPTS/chrome/install_chrome.sh  && rm -rf $INST_SCRIPTS/chrome/
-
-# Install Firefox
-COPY ./src/ubuntu/install/firefox/ $INST_SCRIPTS/firefox/
-COPY ./src/ubuntu/install/firefox/firefox.desktop $HOME/Desktop/
-RUN bash $INST_SCRIPTS/firefox/install_firefox.sh && rm -rf $INST_SCRIPTS/firefox/
-
-### Install Thunderbird
-COPY ./src/ubuntu/install/thunderbird $INST_SCRIPTS/thunderbird/
-RUN bash $INST_SCRIPTS/thunderbird/install_thunderbird.sh  && rm -rf $INST_SCRIPTS/thunderbird/
 
 ######### End Customizations ###########
 
