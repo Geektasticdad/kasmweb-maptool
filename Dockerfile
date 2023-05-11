@@ -24,8 +24,8 @@ COPY ./src/ubuntu/install/misc $INST_SCRIPTS/misc/
 RUN bash $INST_SCRIPTS/misc/install_tools.sh && rm -rf $INST_SCRIPTS/misc/
 
 # Install Google Chrome
-COPY ./src/ubuntu/install/chrome $INST_SCRIPTS/chrome/
-RUN bash $INST_SCRIPTS/chrome/install_chrome.sh  && rm -rf $INST_SCRIPTS/chrome/
+#COPY ./src/ubuntu/install/chrome $INST_SCRIPTS/chrome/
+#RUN bash $INST_SCRIPTS/chrome/install_chrome.sh  && rm -rf $INST_SCRIPTS/chrome/
 
 # Install Firefox
 COPY ./src/ubuntu/install/firefox/ $INST_SCRIPTS/firefox/
@@ -33,8 +33,8 @@ COPY ./src/ubuntu/install/firefox/firefox.desktop $HOME/Desktop/
 RUN bash $INST_SCRIPTS/firefox/install_firefox.sh && rm -rf $INST_SCRIPTS/firefox/
 
 ### Install Thunderbird
-COPY ./src/ubuntu/install/thunderbird $INST_SCRIPTS/thunderbird/
-RUN bash $INST_SCRIPTS/thunderbird/install_thunderbird.sh  && rm -rf $INST_SCRIPTS/thunderbird/
+#COPY ./src/ubuntu/install/thunderbird $INST_SCRIPTS/thunderbird/
+#RUN bash $INST_SCRIPTS/thunderbird/install_thunderbird.sh  && rm -rf $INST_SCRIPTS/thunderbird/
 
 ######### End Customizations ###########
 
