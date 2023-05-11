@@ -12,7 +12,6 @@ WORKDIR $HOME
 COPY ./src/maptool/install-maptool.sh $INST_SCRIPTS/maptool/
 COPY ./src/maptool/maptool-Maptool.desktop $HOME/Desktop/
 COPY ./src/xdg-utils/scripts/ $INST_SCRIPTS/xdg-utils/scripts/
-#export PATH=$PATH:$INST_SCRIPTS/xdg-utils/scripts
 RUN bash $INST_SCRIPTS/maptool/install-maptool.sh && rm -rf $INST_SCRIPTS/maptool/
 
 ### Install Tools
