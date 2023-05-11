@@ -13,6 +13,7 @@ COPY ./src/maptool/install-maptool.sh $INST_SCRIPTS/maptool/
 COPY ./src/maptool/maptool-Maptool.desktop $HOME/Desktop/
 COPY ./src/xdg-utils/scripts/ $INST_SCRIPTS/xdg-utils/scripts/
 RUN bash $INST_SCRIPTS/maptool/install-maptool.sh && rm -rf $INST_SCRIPTS/maptool/
+RUN echo "/usr/bin/desktop_ready && /opt/maptool/bin/MapTool &" > $STARTUPDIR/custom_startup.sh && chmod +x $STARTUPDIR/custom_startup.sh
 
 ### Install Tools
 COPY ./src/ubuntu/install/tools $INST_SCRIPTS/tools/
