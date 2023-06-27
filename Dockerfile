@@ -1,4 +1,4 @@
-FROM kasmweb/core-ubuntu-focal:1.11.0
+FROM kasmweb/core-ubuntu-jammy:1.13.0
 USER root
 
 ENV HOME /home/kasm-default-profile
@@ -11,7 +11,9 @@ WORKDIR $HOME
 # INSTALL MAPTOOL
 COPY ./src/maptool/install-maptool.sh $INST_SCRIPTS/maptool/
 COPY ./src/maptool/maptool-Maptool.desktop $HOME/Desktop/
+COPY ./src/xdg-utils/scripts/ $INST_SCRIPTS/xdg-utils/scripts/
 RUN bash $INST_SCRIPTS/maptool/install-maptool.sh && rm -rf $INST_SCRIPTS/maptool/
+RUN echo "/usr/bin/desktop_ready && /opt/maptool/bin/MapTool &" > $STARTUPDIR/custom_startup.sh && chmod +x $STARTUPDIR/custom_startup.sh
 
 ### Install Tools
 COPY ./src/ubuntu/install/tools $INST_SCRIPTS/tools/
@@ -22,8 +24,8 @@ COPY ./src/ubuntu/install/misc $INST_SCRIPTS/misc/
 RUN bash $INST_SCRIPTS/misc/install_tools.sh && rm -rf $INST_SCRIPTS/misc/
 
 # Install Google Chrome
-COPY ./src/ubuntu/install/chrome $INST_SCRIPTS/chrome/
-RUN bash $INST_SCRIPTS/chrome/install_chrome.sh  && rm -rf $INST_SCRIPTS/chrome/
+#COPY ./src/ubuntu/install/chrome $INST_SCRIPTS/chrome/
+#RUN bash $INST_SCRIPTS/chrome/install_chrome.sh  && rm -rf $INST_SCRIPTS/chrome/
 
 # Install Firefox
 COPY ./src/ubuntu/install/firefox/ $INST_SCRIPTS/firefox/
@@ -31,8 +33,8 @@ COPY ./src/ubuntu/install/firefox/firefox.desktop $HOME/Desktop/
 RUN bash $INST_SCRIPTS/firefox/install_firefox.sh && rm -rf $INST_SCRIPTS/firefox/
 
 ### Install Thunderbird
-COPY ./src/ubuntu/install/thunderbird $INST_SCRIPTS/thunderbird/
-RUN bash $INST_SCRIPTS/thunderbird/install_thunderbird.sh  && rm -rf $INST_SCRIPTS/thunderbird/
+#COPY ./src/ubuntu/install/thunderbird $INST_SCRIPTS/thunderbird/
+#RUN bash $INST_SCRIPTS/thunderbird/install_thunderbird.sh  && rm -rf $INST_SCRIPTS/thunderbird/
 
 ######### End Customizations ###########
 
