@@ -1,4 +1,7 @@
-FROM kasmweb/core-ubuntu-jammy:1.13.0
+#FROM kasmweb/core-ubuntu-jammy:1.13.0
+ARG BASE_TAG="develop"
+ARG BASE_IMAGE="core-ubuntu-jammy"
+FROM kasmweb/$BASE_IMAGE:$BASE_TAG
 USER root
 
 ENV HOME /home/kasm-default-profile
@@ -15,27 +18,6 @@ COPY ./src/xdg-utils/scripts/ $INST_SCRIPTS/xdg-utils/scripts/
 RUN bash $INST_SCRIPTS/maptool/install-maptool.sh && rm -rf $INST_SCRIPTS/maptool/
 RUN echo "/usr/bin/desktop_ready && /opt/maptool/bin/MapTool &" > $STARTUPDIR/custom_startup.sh && chmod +x $STARTUPDIR/custom_startup.sh
 
-### Install Tools
-#COPY ./src/ubuntu/install/tools $INST_SCRIPTS/tools/
-#RUN bash $INST_SCRIPTS/tools/install_tools_deluxe.sh && rm -rf $INST_SCRIPTS/tools/
-
-# Install Utilities
-#COPY ./src/ubuntu/install/misc $INST_SCRIPTS/misc/
-#RUN bash $INST_SCRIPTS/misc/install_tools.sh && rm -rf $INST_SCRIPTS/misc/
-
-# Install Google Chrome
-#COPY ./src/ubuntu/install/chrome $INST_SCRIPTS/chrome/
-#RUN bash $INST_SCRIPTS/chrome/install_chrome.sh  && rm -rf $INST_SCRIPTS/chrome/
-
-# Install Firefox
-#COPY ./src/ubuntu/install/firefox/ $INST_SCRIPTS/firefox/
-#COPY ./src/ubuntu/install/firefox/firefox.desktop $HOME/Desktop/
-#RUN bash $INST_SCRIPTS/firefox/install_firefox.sh && rm -rf $INST_SCRIPTS/firefox/
-
-### Install Thunderbird
-#COPY ./src/ubuntu/install/thunderbird $INST_SCRIPTS/thunderbird/
-#RUN bash $INST_SCRIPTS/thunderbird/install_thunderbird.sh  && rm -rf $INST_SCRIPTS/thunderbird/
-
 # Update the desktop environment to be optimized for a single application
 RUN cp $HOME/.config/xfce4/xfconf/single-application-xfce-perchannel-xml/* $HOME/.config/xfce4/xfconf/xfce-perchannel-xml/
 RUN cp /usr/share/extra/backgrounds/bg_kasm.png /usr/share/extra/backgrounds/bg_default.png
@@ -44,7 +26,7 @@ RUN apt-get remove -y xfce4-panel
 ######### End Customizations ###########
 
 RUN chown 1000:0 $HOME
-RUN $STARTUPDIR/set_user_permission.sh $HOME
+#RUN $STARTUPDIR/set_user_permission.sh $HOME
 
 ENV HOME /home/kasm-user
 WORKDIR $HOME
